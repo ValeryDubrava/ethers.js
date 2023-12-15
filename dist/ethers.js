@@ -6777,6 +6777,10 @@ class Signature {
             assertError(false, "missing s");
         })(sig.s, sig.yParityAndS);
         assertError((getBytes(s)[0] & 0x80) == 0, "non-canonical s");
+	if (sig.v == null) {
+	    sig.v = "0x0";
+	}
+	console.log(sig);
         // Get v; by any means necessary (we check consistency below)
         const { networkV, v } = (function (_v, yParityAndS, yParity) {
             if (_v != null) {
