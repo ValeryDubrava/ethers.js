@@ -324,6 +324,11 @@ export class Signature {
         })(sig.s, sig.yParityAndS);
         assertError((getBytes(s)[0] & 0x80) == 0, "non-canonical s");
 
+        // fix missing v
+        if (sig.v == null) {
+            sig.v = "0x0";
+        }
+
         // Get v; by any means necessary (we check consistency below)
         const { networkV, v } = (function(_v?: BigNumberish, yParityAndS?: string, yParity?: Numeric): { networkV?: bigint, v: 27 | 28 } {
             if (_v != null) {
